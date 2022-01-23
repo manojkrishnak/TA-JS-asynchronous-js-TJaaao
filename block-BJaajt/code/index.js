@@ -1,6 +1,25 @@
 const input = document.querySelector(".username-input");
 const randomBtn = document.querySelector(".random-btn");
+let followersUl = document.querySelector(".followers-ul");
+let followingUl = document.querySelector(".following-ul");
 
+
+function displayFollowersAndFollowing(url, call, ul){
+    followersUl.innerHTML = "";
+    followingUl.innerHTML = "";
+    xhrRequest(url, call, function(data){
+        let users = data.length > 5 ? data.slice(0,5) : data;
+        users.forEach(function(user){
+            let li = document.createElement("li");
+            let img = document.createElement("img");
+            img.classList.add(`${call}-img`);
+            img.src = user.avatar_url;
+            img.alt = user.login + "-img";
+            li.append(img);
+            ul.append(li);
+        })
+    })
+}
 
 function displayUI(userData){
     const profilePic = document.querySelector(".profile-pic");
@@ -13,7 +32,8 @@ function displayUI(userData){
     name.innerText = userData.name === null ? userData.login : userData.name;
 
     username.innerText = "@"+ userData.login;
-
+    displayFollowersAndFollowing(userData.followers_url,"followers", followersUl);
+    displayFollowersAndFollowing(userData.url + "/following","following", followingUl);
 }
 
 function xhrRequest(url, call, cb){
@@ -43,7 +63,6 @@ input.addEventListener("keyup", function(event){
 randomBtn.addEventListener("click", function(){
     let url = "https://dog.ceo/api/breeds/image/random";
     xhrRequest(url, "random", function(data){
-        console.log(data)
         let randomDogImg = document.querySelector(".pic");
         randomDogImg.src = data.message;
         randomDogImg.alt = "img";
