@@ -133,7 +133,34 @@ header h1{
 
 .pic{
     margin: 1rem 0;
-    width: 500px;
-    height: 300px;
+    width: 600px;
+    height: 500px;
     object-fit: cover;
+}
+
+.followers-img, .following-img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid black;
+    object-fit: cover;
+}
+
+.followers-ul, .following-ul{
+    display: flex;
+    width: 450px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.followers-ul::before, .following-ul::before{
+    content: "Followers";
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.following-ul::before{
+    content: "Following";
 }
