@@ -51,7 +51,7 @@ function xhrRequest(url, call, cb){
 };
 
 input.addEventListener("keyup", function(event){
-    if(event.keyCode === 13){
+    if(event.keyCode === 13 && event.target.value !== ""){
         let username = event.target.value;
         let url = `https://api.github.com/users/${username}`;
         console.log(url)
